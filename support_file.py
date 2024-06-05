@@ -1,10 +1,9 @@
 import streamlit as st
 
-hide_streamlit_style = """
+streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
-</style>
 """ 
 
 def reset_value():
@@ -14,4 +13,4 @@ def reset_value():
     st.session_state.meeting_notes = None
     
 def input_validation():
-    st.write("Need to code!!")
+    reset_value()
