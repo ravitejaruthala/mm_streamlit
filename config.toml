@@ -1,0 +1,6 @@
+[general]
+show_footer = false
+
+[server]
+headless = true
+
