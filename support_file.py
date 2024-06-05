@@ -15,4 +15,6 @@ def reset_value():
     st.session_state.meeting_notes = None
     
 def input_validation():
+    st.toast('Submitted successfully!', icon="✅")
+    st.balloons()
     reset_value()

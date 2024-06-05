@@ -14,7 +14,4 @@ with st.form("MofM_form"):
    with columns[0]:
     submitted = st.form_submit_button("Submit", on_click=input_validation)
    with columns[1]:
-    reset_button = st.form_submit_button('Reset', on_click=reset_value)
-   if submitted:
-       st.toast('Submitted successfully!', icon="✅")
-       st.balloons()
+    reset_button = st.form_submit_button('Reset', on_click=reset_value)     
