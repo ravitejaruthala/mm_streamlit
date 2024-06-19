@@ -10,8 +10,6 @@ if searched:
     else:
         fetched_result = fetch_meeting_notes(unique_code)
         if fetched_result != None:
-            edit_meeting_notes(unique_code, fetched_result)  
-            st.session_state.unique_code_field = None     
+            edit_meeting_notes(unique_code, fetched_result)       
         else:
             st.warning("Oops!! there is no such meeting ID with us.", icon="⚠️")
-            st.session_state.unique_code_field = None
