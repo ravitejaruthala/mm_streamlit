@@ -1,10 +1,10 @@
-# support_file.py
 import streamlit as st
-import time
 import sqlite3
 import secrets
 from jinja2 import Template
 import streamlit.components.v1 as components
+from datetime import datetime
+import time
 
 streamlit_style = """
 <style>
@@ -67,6 +67,32 @@ def display_meeting_notes(result_parameter):
         jinja_template = Template(template_content)
         rendered_html = jinja_template.render(fetched_content = result_parameter)
         components.html(rendered_html, height=1000, scrolling=True)
+        
+def edit_meeting_notes(ID_parameter, result_parameter):
+    st.subheader("***We have the below version of your meeting notes.***")
+    with st.form(key='update_form'):
+        new_author_name = st.text_input("Author's Name:", value=result_parameter[2])
+        new_author_email = st.text_input("Author's Email:", value=result_parameter[3])
+        new_meeting_date = st.date_input("Date of the Meeting:", value=datetime.strptime(result_parameter[4], '%Y-%m-%d'))  
+        new_meeting_agenda = st.text_input("Meeting Agenda:", value=result_parameter[5])
+        new_meeting_notes = st.text_area("Meeting Notes:", value=result_parameter[6])
+        clicked = st.form_submit_button("Update the meeting notes")
+        if clicked:
+            update_meeting_notes(
+                ID_parameter,
+                new_author_name,
+                new_author_email,
+                new_meeting_date.strftime('%Y-%m-%d'),
+                new_meeting_agenda,
+                new_meeting_notes
+            )
+            st.success("Meeting Notes Updated Successfully!")
+                
+            # Optionally clear session state or form inputs after successful update
+            st.session_state.new_author_name = ""
+            st.session_state.new_author_email = ""
+            st.session_state.new_meeting_agenda = ""
+            st.session_state.new_meeting_notes = ""
 
 def generate_unique_code():
     return secrets.token_hex(8)  # 8 bytes = 16 characters in hexadecimal
