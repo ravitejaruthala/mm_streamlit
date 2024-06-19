@@ -67,7 +67,8 @@ def display_meeting_notes(result_parameter):
         jinja_template = Template(template_content)
         rendered_html = jinja_template.render(fetched_content = result_parameter)
         components.html(rendered_html, height=1000, scrolling=True)
-        
+
+@st.experimental_dialog("Update Meeting Notes.", width="large")        
 def edit_meeting_notes(ID_parameter, result_parameter):
     st.subheader("***We have the below version of your meeting notes.***")
     with st.form(key='update_form'):
@@ -86,13 +87,8 @@ def edit_meeting_notes(ID_parameter, result_parameter):
                 new_meeting_agenda,
                 new_meeting_notes
             )
-            st.success("Meeting Notes Updated Successfully!")
-                
-            # Optionally clear session state or form inputs after successful update
-            st.session_state.new_author_name = ""
-            st.session_state.new_author_email = ""
-            st.session_state.new_meeting_agenda = ""
-            st.session_state.new_meeting_notes = ""
+            input_validation()
+            st.rerun()
 
 def generate_unique_code():
     return secrets.token_hex(8)  # 8 bytes = 16 characters in hexadecimal
