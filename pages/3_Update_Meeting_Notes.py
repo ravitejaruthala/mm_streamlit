@@ -2,7 +2,7 @@ from support_file import *
 
 page_configuration("Update Meeting Notes", "📝")
 search_container = st.container()
-unique_code = search_container.text_input("**Enter the Meeting ID**", placeholder="Search here...", max_chars=16)
+unique_code = search_container.text_input("**Enter the Meeting ID**", placeholder="Search here...", max_chars=16, key="unique_code_field")
 searched = search_container.button("Fetch Meeting notes")
 if searched:
     if len(unique_code) == 0:
@@ -10,8 +10,7 @@ if searched:
     else:
         fetched_result = fetch_meeting_notes(unique_code)
         if fetched_result != None:
-            edit_meeting_notes(unique_code, fetched_result)
-            st.session_state.unique_code = None       
+            edit_meeting_notes(unique_code, fetched_result)       
         else:
             st.warning("Oops!! there is no such meeting ID with us.", icon="⚠️")
-            st.session_state.unique_code = None
+        st.session_state.unique_code_field = None

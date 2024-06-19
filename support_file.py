@@ -87,7 +87,6 @@ def edit_meeting_notes(ID_parameter, result_parameter):
                 new_meeting_agenda,
                 new_meeting_notes
             )
-            input_validation()
             st.rerun()
 
 def generate_unique_code():
