@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minutes of Meeting</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: 10px;
+        border-style: solid;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .meeting-details {
+        margin-bottom: 20px;
+      }
+      .meeting-details p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Minutes of Meeting</h1>
+    <div class="meeting-details">
+      <p><strong>Date:</strong> {{fetched_content[4]}}</p>
+      <p><strong>Author:</strong> {{fetched_content[3]}}</p>
+      <p><strong>Meeting Agenda:</strong> {{fetched_content[5]}}</p>
+      <p><strong>Meeting Notes:</strong> {{fetched_content[6]}}</p>
+    </div>
+  </body>
+</html>
