@@ -3,6 +3,8 @@ import streamlit as st
 import time
 import sqlite3
 import secrets
+from jinja2 import Template
+import streamlit.components.v1 as components
 
 streamlit_style = """
 <style>
@@ -14,7 +16,7 @@ footer {visibility: hidden;}
 
 def get_db_connection():
     conn = sqlite3.connect('meeting_notes.db')
-    conn.row_factory = sqlite3.Row
+    #conn.row_factory = sqlite3.Row
     return conn
 
 def initialize_db():
@@ -52,27 +54,19 @@ def input_validation():
     st.toast('Submitted successfully!', icon="✅")
     st.balloons()
     st.toast('You will receive an email shortly!', icon="✉️")
-
-def display_search_container():
-    search_container = st.container()
-    selected = search_container.text_input("**Enter the Meeting ID**", placeholder="Search here...")
-    if search_container.button("Fetch Meeting notes"):
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM notes WHERE unique_code = ?", (selected,))
-        result = cur.fetchone()
-        cur.close()
-        conn.close()
-        if result:
-            st.write(dict(result))
-        else:
-            st.write("No meeting found with that ID.")
-
+        
 def stream_data_content(subheader_parameter, content_parameter):
     st.subheader(subheader_parameter)
     for word in content_parameter.split(" "):
         yield word + " "
         time.sleep(0.03)
+
+def display_meeting_notes(result_parameter):
+    with open("template.html", "r") as template_file:
+        template_content = template_file.read()
+        jinja_template = Template(template_content)
+        rendered_html = jinja_template.render(fetched_content = result_parameter)
+        components.html(rendered_html, height=1000, scrolling=True)
 
 def generate_unique_code():
     return secrets.token_hex(8)  # 8 bytes = 16 characters in hexadecimal
