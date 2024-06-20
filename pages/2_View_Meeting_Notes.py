@@ -2,7 +2,7 @@ from support_file import *
 
 page_configuration("View Meeting Notes", "📖")
 search_container = st.container()
-selected = search_container.text_input("**Enter the Meeting ID**", placeholder="Search here...")
+selected = search_container.text_input("**Enter the Meeting ID**", placeholder="Search here...", key="meeting_ID", max_chars=16)
 searched = search_container.button("Fetch Meeting notes")
 if searched:
     if len(selected) == 0:
