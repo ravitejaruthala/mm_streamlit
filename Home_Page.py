@@ -8,15 +8,18 @@ initialize_db()
 
 
 summary = """
-Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Welcome to MinuteMate!
+
+Capture and organize your meeting notes effortlessly with our intuitive platform. Never miss a detail again!
+
+Whether you're in a brainstorming session, team meeting, or client discussion, this application is your trusted companion for effective note-taking.
+
+Get started now and experience seamless collaboration and productivity.
+
+Happy note-taking!
 """
 
-page_configuration("Minutes of Meeting", "📋")
+page_configuration("MinuteMate", "📋")
 st.write(stream_data_content("Web App Summary:", summary))
 st.write(stream_data_content("Instructions:", summary)) 
 st.write(stream_data_content("More Information:", summary))

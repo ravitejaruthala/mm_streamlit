@@ -18,7 +18,6 @@ footer {visibility: hidden;}
 
 def page_configuration(title_parameter, icon_parameter):
     st.set_page_config(page_title=title_parameter, page_icon=icon_parameter)
-    st.sidebar.header(title_parameter)
     st.markdown(streamlit_style, unsafe_allow_html=True)
     st.markdown(f"<h1 style='text-align: center;'>{title_parameter}</h1>", unsafe_allow_html=True)
     
@@ -46,7 +45,7 @@ def display_meeting_notes(result_parameter):
 @st.experimental_dialog("Update Meeting Notes.", width="large")        
 def edit_meeting_notes(ID_parameter, result_parameter):
     st.subheader("***We have the below version of your meeting notes.***")
-    with st.form(key='update_form'):
+    with st.form(key='update_form', clear_on_submit=True):
         new_author_name = st.text_input("Author's Name:", value=result_parameter[2])
         new_author_email = st.text_input("Author's Email:", value=result_parameter[3])
         new_meeting_date = st.date_input("Date of the Meeting:", value=datetime.strptime(result_parameter[4], '%Y-%m-%d'))  
