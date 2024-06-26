@@ -1,12 +1,7 @@
 import streamlit as st
 from support_file import *
 
-import streamlit as st
-from support_file import initialize_db
-
 initialize_db()
-
-
 summary_content = """
 Welcome to MinuteMate!
 
