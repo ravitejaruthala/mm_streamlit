@@ -27,14 +27,6 @@ def stream_data_content(subheader_parameter, content_parameter):
         yield word + " "
         time.sleep(0.03)
         
-def clear_field_value (field_key):
-    st.session_state.field_key = None
-
-def input_validation():
-    st.toast('Submitted successfully!', icon="✅")
-    st.balloons()
-    st.toast('You will receive an email shortly!', icon="✉️")
-        
 def display_meeting_notes(result_parameter):
     with open("template.html", "r") as template_file:
         template_content = template_file.read()
@@ -63,6 +55,11 @@ def edit_meeting_notes(ID_parameter, result_parameter):
             )
             st.rerun()
             
+def form_success_notification():
+    st.toast('Submitted successfully!', icon="✅")
+    st.balloons()
+    st.toast('You will receive an email shortly!', icon="✉️")
+    
 ### User-defined functions for DataBase ###
             
 def get_db_connection():

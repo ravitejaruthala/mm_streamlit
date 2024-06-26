@@ -15,10 +15,6 @@ with st.form("MofM_form", clear_on_submit=True):
         reseted = st.form_submit_button('Reset')
     if submitted:
         save_meeting_notes(input_name, input_email, input_date, input_agenda, input_notes)
-        input_validation()
+        form_success_notification()
     elif reseted:
-        clear_field_value("author_name")
-        clear_field_value("author_email")
-        clear_field_value("meeting_agenda")
-        clear_field_value("meeting_notes")
-        st.toast('Done with the reset!', icon="🧹")
+        st.toast('All the values were cleared!', icon="🧹")

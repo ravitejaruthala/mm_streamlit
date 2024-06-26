@@ -18,4 +18,4 @@ with st.form("Update_Notes", clear_on_submit=True):
             else:
                 st.warning("Oops!! there is no such meeting ID with us.", icon="⚠️")
     elif reseted:
-        clear_field_value("meeting_ID")
+        st.toast('The meeting ID was cleared!', icon="🧹")
