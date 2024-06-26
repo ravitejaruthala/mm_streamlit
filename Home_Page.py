@@ -12,9 +12,7 @@ Welcome to MinuteMate!
 
 Capture and organize your meeting notes effortlessly with our intuitive platform. Never miss a detail again!
 
-Whether you're in a brainstorming session, team meeting, or client discussion, this application is your trusted companion for effective note-taking.
-
-Get started now and experience seamless productivity and note-making.
+Whether you're in a brainstorming session, team meeting, or client discussion, this application is your trusted companion for effective note-taking. Get started now and experience seamless productivity.
 
 Happy note-taking!
 """
