@@ -109,6 +109,15 @@ def fetch_meeting_notes(unique_code):
     conn.close()
     return result
 
+def fetch_meeting_ids(email_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT meeting_date, meeting_agenda, unique_code FROM notes WHERE author_email = ?", (email_id,))
+    result = cur.fetchone()
+    cur.close()
+    conn.close()
+    return result
+
 def update_meeting_notes(unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes):
     conn = get_db_connection()
     cur = conn.cursor()
