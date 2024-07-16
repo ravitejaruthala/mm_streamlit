@@ -36,7 +36,7 @@ def display_meeting_notes(result_parameter):
 
 @st.experimental_dialog("Update Meeting Notes.", width="large")        
 def edit_meeting_notes(ID_parameter, result_parameter):
-    st.subheader("***We have the below version of your meeting notes.***")
+    st.subheader("***We have the below details about your meeting notes.***")
     with st.form(key='update_form', clear_on_submit=True):
         new_author_name = st.text_input("Author's Name:", value=result_parameter[2])
         new_author_email = st.text_input("Author's Email:", value=result_parameter[3])
@@ -113,7 +113,7 @@ def fetch_meeting_ids(email_id):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("SELECT meeting_date, meeting_agenda, unique_code FROM notes WHERE author_email = ?", (email_id,))
-    result = cur.fetchone()
+    result = cur.fetchall()
     cur.close()
     conn.close()
     return result
