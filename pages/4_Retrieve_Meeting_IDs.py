@@ -12,10 +12,12 @@ with st.form("Retrieve_IDs", clear_on_submit=True):
 if retrieved:
     if(len(email_address) == 0):
         st.warning("Oops!! you forgot to enter a valid email address.", icon="⚠️")
-    else:
+    elif("@" in email_address and "." in email_address): 
         if len(fetch_meeting_ids(email_address)):
             st.success("Notes found, we have sent the meeting details to "+email_address, icon="✅")
         else:
             st.warning("Oops!! we don't have any meeting notes with this email address. We appreciate if you have one.", icon="⚠️")
+    else:
+        st.warning("Oops!! that doesn't look like an email address. Try again with a valid email ID.", icon="⚠️")
 elif reseted:
     st.toast('Your input was cleared!', icon="🧹")

@@ -15,10 +15,12 @@ with st.form("MofM_form", clear_on_submit=True):
     with columns[1]:
         reseted = st.form_submit_button('Reset')
     if submitted:
-        if(len(input_name) or len(input_email) or len(input_agenda) or len(input_notes)==0):
+        if(len(input_name) and len(input_email) and len(input_agenda) and len(input_notes)==0):
             st.warning("Oops!! we can't record your empty inputs.", icon="⚠️")
-        else:
+        elif("@" in input_email and "." in input_email): 
             save_meeting_notes(input_name, input_email, input_date, input_agenda, input_notes)
             form_success_notification()
+        else:
+            st.warning("Oops!! that doesn't look like an email address. Try again with a valid email ID.", icon="⚠️")
     elif reseted:
         st.toast('Your input was cleared!', icon="🧹")
