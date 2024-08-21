@@ -66,8 +66,13 @@ def initialize_db():
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute('''
+            CREATE SEQUENCE notes_row_id_seq
+            START WITH 1
+            INCREMENT BY 1;
+                ''')
+    cur.execute('''
         CREATE TABLE IF NOT EXISTS notes (
-    id SERIAL PRIMARY KEY,
+    id INT PRIMARY KEY DEFAULT nextval('notes_row_id_seq'),
     unique_code STRING NOT NULL,
     author_name STRING NOT NULL,
     author_email STRING NOT NULL,
