@@ -9,7 +9,7 @@ with st.form("MofM_form", clear_on_submit=True):
     input_agenda = st.text_input("**Agenda of the Meeting:**", placeholder="Specify the meeting's agenda here.", key="meeting_agenda")
     input_notes = st.text_area("**Minutes of the Meeting:**", placeholder="Mention the meeting minutes here.", key="meeting_notes")
     st.write('***:red[Before clicking on Submit button, make sure all the fields are filled properly with valid data. Else you will lose your meeting notes.]***')
-    columns = st.columns([12, 2], gap="small")
+    columns = st.columns([12, 1], gap="small")
     with columns[0]:
         reseted = st.form_submit_button('Reset')
     with columns[1]:
