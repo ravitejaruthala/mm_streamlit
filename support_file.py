@@ -1,10 +1,10 @@
 import streamlit as st
-import sqlite3
 import secrets
 from jinja2 import Template
 import streamlit.components.v1 as components
 from datetime import datetime
 import time
+import psycopg2
 
 streamlit_style = """
 <style>
@@ -61,14 +61,9 @@ def form_success_notification():
     st.toast('You will receive an email shortly!', icon="✉️")
     
 ### User-defined functions for DataBase ###
-            
-def get_db_connection():
-    conn = sqlite3.connect('meeting_notes.db')
-    #conn.row_factory = sqlite3.Row
-    return conn
 
 def initialize_db():
-    conn = get_db_connection()
+    conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute('''
         CREATE TABLE IF NOT EXISTS notes (
@@ -90,7 +85,7 @@ def generate_unique_code():
 
 def save_meeting_notes(author_name, author_email, meeting_date, meeting_agenda, meeting_notes):
     unique_code = generate_unique_code()
-    conn = get_db_connection()
+    conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute(
         "INSERT INTO notes (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes) VALUES (?, ?, ?, ?, ?, ?)",
@@ -101,7 +96,7 @@ def save_meeting_notes(author_name, author_email, meeting_date, meeting_agenda, 
     conn.close()
 
 def fetch_meeting_notes(unique_code):
-    conn = get_db_connection()
+    conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute("SELECT * FROM notes WHERE unique_code = ?", (unique_code,))
     result = cur.fetchone()
@@ -110,7 +105,7 @@ def fetch_meeting_notes(unique_code):
     return result
 
 def fetch_meeting_ids(email_id):
-    conn = get_db_connection()
+    conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute("SELECT meeting_date, meeting_agenda, unique_code FROM notes WHERE author_email = ?", (email_id,))
     result = cur.fetchall()
@@ -119,7 +114,7 @@ def fetch_meeting_ids(email_id):
     return result
 
 def update_meeting_notes(unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes):
-    conn = get_db_connection()
+    conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute(
         "UPDATE notes SET author_name=?, author_email=?, meeting_date=?, meeting_agenda=?, meeting_notes=? WHERE unique_code=?",
