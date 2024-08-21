@@ -11,9 +11,9 @@ with st.form("MofM_form", clear_on_submit=True):
     st.write('***:red[Before clicking on Submit button, make sure all the fields are filled properly with valid data. Else you will lose your meeting notes.]***')
     columns = st.columns([12, 1.5], gap="small")
     with columns[0]:
-        submitted = st.form_submit_button("Submit")  
-    with columns[1]:
         reseted = st.form_submit_button('Reset')
+    with columns[1]:
+        submitted = st.form_submit_button("Submit") 
     if submitted:
         if(len(input_name) and len(input_email) and len(input_agenda) and len(input_notes)==0):
             st.warning("Oops!! we can't record your empty inputs.", icon="⚠️")
