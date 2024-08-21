@@ -87,7 +87,7 @@ def save_meeting_notes(author_name, author_email, meeting_date, meeting_agenda, 
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute(
-        "INSERT INTO notes (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes) VALUES ($1, $2, $3, $4, $5, $6)",
+        "INSERT INTO public.notes (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes) VALUES ($1, $2, $3, $4, $5, $6)",
         (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes)
     )
     conn.commit()
