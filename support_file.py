@@ -68,7 +68,7 @@ def initialize_db():
     cur.execute('''
         CREATE TABLE IF NOT EXISTS notes (
     id SERIAL PRIMARY KEY,
-    unique_code STRING PRIMARY KEY NOT NULL,
+    unique_code STRING NOT NULL,
     author_name STRING NOT NULL,
     author_email STRING NOT NULL,
     meeting_date STRING NOT NULL,
