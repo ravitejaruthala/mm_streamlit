@@ -67,14 +67,13 @@ def initialize_db():
     cur = conn.cursor()
     cur.execute('''
         CREATE TABLE IF NOT EXISTS notes (
-            id INTEGER PRIMARY KEY SERIAL,
-            unique_code TEXT NOT NULL,
-            author_name TEXT NOT NULL,
-            author_email TEXT NOT NULL,
-            meeting_date TEXT NOT NULL,
-            meeting_agenda TEXT NOT NULL,
-            meeting_notes TEXT NOT NULL
-        )
+    id SERIAL PRIMARY KEY,
+    unique_code STRING NOT NULL,
+    author_name STRING NOT NULL,
+    author_email STRING NOT NULL,
+    meeting_date STRING NOT NULL,
+    meeting_agenda STRING NOT NULL,
+    meeting_notes STRING NOT NULL );
     ''')
     conn.commit()
     cur.close()
