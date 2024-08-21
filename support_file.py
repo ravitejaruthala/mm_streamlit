@@ -67,7 +67,7 @@ def initialize_db():
     cur = conn.cursor()
     cur.execute('''
         CREATE TABLE IF NOT EXISTS notes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY SERIAL,
             unique_code TEXT NOT NULL,
             author_name TEXT NOT NULL,
             author_email TEXT NOT NULL,
