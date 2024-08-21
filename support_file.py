@@ -87,7 +87,7 @@ def save_meeting_notes(author_name, author_email, meeting_date, meeting_agenda, 
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute(
-        "INSERT INTO notes (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO notes (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes) VALUES ($1, $2, $3, $4, $5, $6)",
         (unique_code, author_name, author_email, meeting_date, meeting_agenda, meeting_notes)
     )
     conn.commit()
@@ -97,7 +97,7 @@ def save_meeting_notes(author_name, author_email, meeting_date, meeting_agenda, 
 def fetch_meeting_notes(unique_code):
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
-    cur.execute("SELECT * FROM notes WHERE unique_code = ?", (unique_code,))
+    cur.execute("SELECT * FROM notes WHERE unique_code = $1", (unique_code,))
     result = cur.fetchone()
     cur.close()
     conn.close()
@@ -106,7 +106,7 @@ def fetch_meeting_notes(unique_code):
 def fetch_meeting_ids(email_id):
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
-    cur.execute("SELECT meeting_date, meeting_agenda, unique_code FROM notes WHERE author_email = ?", (email_id,))
+    cur.execute("SELECT meeting_date, meeting_agenda, unique_code FROM notes WHERE author_email = $1", (email_id,))
     result = cur.fetchall()
     cur.close()
     conn.close()
@@ -116,7 +116,7 @@ def update_meeting_notes(unique_code, author_name, author_email, meeting_date, m
     conn = psycopg2.connect(st.secrets["DB_URL"])
     cur = conn.cursor()
     cur.execute(
-        "UPDATE notes SET author_name=?, author_email=?, meeting_date=?, meeting_agenda=?, meeting_notes=? WHERE unique_code=?",
+        "UPDATE notes SET author_name=$1, author_email=$2, meeting_date=$3, meeting_agenda=$4, meeting_notes=$5 WHERE unique_code=$6",
         (author_name, author_email, meeting_date, meeting_agenda, meeting_notes, unique_code)
     )
     conn.commit()
