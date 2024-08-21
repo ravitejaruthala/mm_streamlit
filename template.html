@@ -18,6 +18,7 @@
       }
       .meeting-details {
         margin-bottom: 20px;
+        white-space: pre-wrap;
       }
       .meeting-details p {
         margin: 5px 0;
@@ -27,9 +28,9 @@
   <body>
     <h1>Minutes of Meeting</h1>
     <div class="meeting-details">
-      <p><strong>Date:</strong> {{fetched_content[4]}}</p>
-      <p><strong>Author:</strong> {{fetched_content[2]}}</p>
-      <p><strong>Meeting Agenda:</strong> {{fetched_content[5]}}</p>
+      <div><strong>Date:</strong> {{fetched_content[4]}}</div>
+      <div><strong>Author:</strong> {{fetched_content[2]}}</div>
+      <div><strong>Meeting Agenda:</strong> {{fetched_content[5]}}</div>
       <div><strong>Meeting Notes:</strong> {{fetched_content[6]}}</div>
     </div>
   </body>
