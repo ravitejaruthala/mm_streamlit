@@ -5,7 +5,8 @@ from jinja2 import Template
 import streamlit.components.v1 as components
 from datetime import datetime
 import time
-import psycopg2
+import smtplib
+from email.message import EmailMessage
 
 streamlit_style = """
 <style>
@@ -131,3 +132,15 @@ def update_meeting_notes(unique_code, author_name, author_email, meeting_date, m
     conn.commit()
     cur.close()
     conn.close()
+    
+### User-defined functions for Email notifications ###
+def send_email(sender, receiver, subject, body):
+    msg = EmailMessage()
+    msg.set_content(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = receiver  
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login("noreply.meetingmate@gmail.com", "SuryaRavi@1995")
+        smtp.send_message(msg)
+        smtp.quit()

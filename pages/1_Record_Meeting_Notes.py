@@ -20,6 +20,7 @@ with st.form("MofM_form", clear_on_submit=True):
         elif("@" in input_email and "." in input_email): 
             save_meeting_notes(input_name, input_email, input_date, input_agenda, input_notes)
             form_success_notification()
+            send_email("noreply.meetingmate@gmail.com", input_email, "Recorded Notes", "Test email body")
         else:
             st.warning("Oops!! that doesn't look like an email address. Try again with a valid email ID.", icon="⚠️")
     elif reseted:
